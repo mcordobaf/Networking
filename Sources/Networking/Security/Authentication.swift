@@ -7,15 +7,15 @@
 
 import Foundation
 
-protocol AuthenticationProtocol:AnyObject{
+public protocol AuthenticationProtocol:AnyObject{
   var tokenStorage:String? { get }
   func saveToken(authenticationType:AuthenticationType)
   func getAuthentication() -> Dictionary<String, String>?
 }
 
-final class AuthenticationManager:AuthenticationProtocol{
-  @TokenStorage var tokenStorage:String?
-  func saveToken(authenticationType: AuthenticationType) {
+public final class AuthenticationManager:AuthenticationProtocol{
+  @TokenStorage public var tokenStorage:String?
+  public func saveToken(authenticationType: AuthenticationType) {
     switch authenticationType {
     case .basicAuthentication(let basicAuthenticationToken):
       tokenStorage = basicAuthenticationToken
@@ -24,7 +24,7 @@ final class AuthenticationManager:AuthenticationProtocol{
     }
   }
   
-  func getAuthentication() -> Dictionary<String, String>? {
+  public func getAuthentication() -> Dictionary<String, String>? {
     guard let tokenStorage = tokenStorage else { return nil }
     return [ String(Constants.AUTHENTICATION_KEY) : tokenStorage ]
   }

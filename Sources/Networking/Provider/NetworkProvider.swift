@@ -8,10 +8,10 @@
 import Foundation
 import Combine
 
-protocol NetworkProviderProtocol:AnyObject{
+public protocol NetworkProviderProtocol:AnyObject{
   var session:URLSession { get }
   var authenticatorManager:AuthenticationManager { get }
-  func execute<T:Codable, EndpointProtocolImplemented:EndpointProtocol>(endpoint:EndpointProtocolImplemented) -> AnyPublisher<T, GenericError>
+  func run<T:Codable, EndpointProtocolImplemented:EndpointProtocol>(endpoint:EndpointProtocolImplemented) -> AnyPublisher<T, GenericError>
 }
 
 final class NetworkProvider:NetworkProviderProtocol{
@@ -24,7 +24,7 @@ final class NetworkProvider:NetworkProviderProtocol{
     self.authenticatorManager = authenticatorManager
   }
   
-  func execute<T:Codable, EndpointProtocolImplemented>(endpoint: EndpointProtocolImplemented) -> AnyPublisher<T, GenericError> where EndpointProtocolImplemented : EndpointProtocol {
+  func run<T:Codable, EndpointProtocolImplemented>(endpoint: EndpointProtocolImplemented) -> AnyPublisher<T, GenericError> where EndpointProtocolImplemented : EndpointProtocol {
     guard let url = endpoint.url else {
       return Fail(error: GenericError.network(description: "error")).eraseToAnyPublisher()
     }

@@ -10,7 +10,7 @@ import Foundation
 public typealias Headers = [String:String]
 public typealias Parameters = [String:String]
 
-protocol EndpointProtocol{
+public protocol EndpointProtocol{
   associatedtype Body = Codable
   var url:URL? { get }
   var requestMethod:RequestMethod { get }
@@ -21,15 +21,15 @@ protocol EndpointProtocol{
   func getBody() -> Data?
 }
 
-final class Endpoint<Body:Codable>:EndpointProtocol{
-  var url:URL?
-  var requestMethod: RequestMethod
-  var headers: Headers?
-  var authentication: AuthenticationType?
-  var parameters:Parameters?
-  var body: Body?
+public final class Endpoint<Body:Codable>:EndpointProtocol{
+  public var url:URL?
+  public var requestMethod: RequestMethod
+  public var headers: Headers?
+  public var authentication: AuthenticationType?
+  public var parameters:Parameters?
+  public var body: Body?
   
-  init(
+  public init(
     urlComponents:URLComponents,
     requestMethod:RequestMethod,
     headers:Headers?,
@@ -44,7 +44,7 @@ final class Endpoint<Body:Codable>:EndpointProtocol{
     self.body = body
   }
   
-  func getBody() -> Data? {
+  public func getBody() -> Data? {
     if let body = self.body, let bodyEncoded = try? JSONEncoder().encode(body){
       return bodyEncoded
     }

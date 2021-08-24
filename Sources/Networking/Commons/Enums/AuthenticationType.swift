@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AuthenticationType {
+public enum AuthenticationType {
   case basicAuthentication(String)
   case bearerToken(String)
 }

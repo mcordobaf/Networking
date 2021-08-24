@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol TokenStorageProtocol{
+public protocol TokenStorageProtocol{
   associatedtype Token
   var userDefaults:UserDefaults { get }
   var key:TokenKey { get }
@@ -15,10 +15,10 @@ protocol TokenStorageProtocol{
 }
 
 @propertyWrapper
-class TokenStorage<Token>:TokenStorageProtocol{
-  internal var userDefaults:UserDefaults = UserDefaults.standard
-  internal var key:TokenKey = .tokenKey
-  var wrappedValue:Token? {
+public class TokenStorage<Token>:TokenStorageProtocol{
+  public var userDefaults:UserDefaults = UserDefaults.standard
+  public var key:TokenKey = .tokenKey
+  public var wrappedValue:Token? {
     get {
       userDefaults.object(forKey: self.key.rawValue) as? Token
     }
@@ -28,11 +28,11 @@ class TokenStorage<Token>:TokenStorageProtocol{
     }
   }
   
-  init(wrappedValue:Token? = nil) {
+  public init(wrappedValue:Token? = nil) {
     self.wrappedValue = wrappedValue
   }
 }
 
-enum TokenKey:String {
+public enum TokenKey:String {
   case tokenKey
 }

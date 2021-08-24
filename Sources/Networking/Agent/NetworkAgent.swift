@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol NetworkAgentProtocol{
+public protocol NetworkAgentProtocol{
   var networkProvider:NetworkProviderProtocol { get }
 }
 
