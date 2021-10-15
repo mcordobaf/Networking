@@ -52,8 +52,8 @@ public final class Endpoint<Body:Codable>:EndpointProtocol{
   }
 }
 
-class EndpointDI{
-  static func diBuilder<Body:Codable>(
+public class EndpointDI{
+  public static func diBuilder<Body:Codable>(
     urlComponents:URLComponents,
     requestMethod:RequestMethod,
     headers:Headers?,
@@ -70,7 +70,7 @@ class EndpointDI{
       body: body)
   }
   
-  static func diBuilder<AnyCodable:Codable>(
+  public static func diBuilder<AnyCodable:Codable>(
     urlComponents:URLComponents,
     requestMethod:RequestMethod,
     headers:Headers,
