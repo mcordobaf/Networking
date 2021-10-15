@@ -11,8 +11,8 @@ public protocol NetworkAgentProtocol{
   var networkProvider:NetworkProviderProtocol { get }
 }
 
-final class NetworkAgent:NetworkAgentProtocol{
-  var networkProvider: NetworkProviderProtocol
+public final class NetworkAgent:NetworkAgentProtocol {
+  public var networkProvider: NetworkProviderProtocol
   init(networkProvider:NetworkProviderProtocol = NetworkProvider()) {
     self.networkProvider = networkProvider
   }
