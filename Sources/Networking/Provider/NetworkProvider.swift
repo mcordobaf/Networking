@@ -14,9 +14,9 @@ public protocol NetworkProviderProtocol:AnyObject{
   func run<T:Codable, EndpointProtocolImplemented:EndpointProtocol>(endpoint:EndpointProtocolImplemented) -> AnyPublisher<T, GenericError>
 }
 
-final class NetworkProvider:NetworkProviderProtocol{
-  var authenticatorManager:AuthenticationManager
-  var session: URLSession
+public final class NetworkProvider:NetworkProviderProtocol{
+  public var authenticatorManager:AuthenticationManager
+  public var session: URLSession
   init(authenticatorManager:AuthenticationManager = AuthenticationManager()) {
     let configuration = URLSessionConfiguration.default
     configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
@@ -24,7 +24,7 @@ final class NetworkProvider:NetworkProviderProtocol{
     self.authenticatorManager = authenticatorManager
   }
   
-  func run<T:Codable, EndpointProtocolImplemented>(endpoint: EndpointProtocolImplemented) -> AnyPublisher<T, GenericError> where EndpointProtocolImplemented : EndpointProtocol {
+  public func run<T:Codable, EndpointProtocolImplemented>(endpoint: EndpointProtocolImplemented) -> AnyPublisher<T, GenericError> where EndpointProtocolImplemented : EndpointProtocol {
     guard let url = endpoint.url else {
       return Fail(error: GenericError.network(description: "error")).eraseToAnyPublisher()
     }
