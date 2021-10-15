@@ -74,7 +74,7 @@ class EndpointDI{
     urlComponents:URLComponents,
     requestMethod:RequestMethod,
     headers:Headers,
-    authentication:AuthenticationType,
+    authentication:AuthenticationType?,
     parameters:Parameters? = nil
   ) -> some EndpointProtocol{
     return Endpoint<AnyCodable>(
