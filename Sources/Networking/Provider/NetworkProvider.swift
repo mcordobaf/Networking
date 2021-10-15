@@ -14,7 +14,7 @@ public protocol NetworkProviderProtocol:AnyObject{
   func run<T:Codable, EndpointProtocolImplemented:EndpointProtocol>(endpoint:EndpointProtocolImplemented) -> AnyPublisher<T, GenericError>
 }
 
-public final class NetworkProvider:NetworkProviderProtocol{
+public class NetworkProvider: NetworkProviderProtocol{
   public var authenticatorManager:AuthenticationManager
   public var session: URLSession
   init(authenticatorManager:AuthenticationManager = AuthenticationManager()) {
@@ -22,6 +22,10 @@ public final class NetworkProvider:NetworkProviderProtocol{
     configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
     self.session = URLSession(configuration: configuration)
     self.authenticatorManager = authenticatorManager
+  }
+  
+  public static func builder() -> NetworkProviderProtocol {
+    return NetworkProvider()
   }
   
   public func run<T:Codable, EndpointProtocolImplemented>(endpoint: EndpointProtocolImplemented) -> AnyPublisher<T, GenericError> where EndpointProtocolImplemented : EndpointProtocol {

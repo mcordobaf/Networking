@@ -7,13 +7,6 @@
 
 import Foundation
 
-public protocol NetworkAgentProtocol{
+public protocol NetworkAgent {
   var networkProvider:NetworkProviderProtocol { get }
-}
-
-public final class NetworkAgent:NetworkAgentProtocol {
-  public var networkProvider: NetworkProviderProtocol
-  init(networkProvider:NetworkProviderProtocol = NetworkProvider()) {
-    self.networkProvider = networkProvider
-  }
 }

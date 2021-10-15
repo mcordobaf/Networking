@@ -13,7 +13,7 @@ public protocol AuthenticationProtocol:AnyObject{
   func getAuthentication() -> Dictionary<String, String>?
 }
 
-public final class AuthenticationManager:AuthenticationProtocol{
+public class AuthenticationManager:AuthenticationProtocol{
   @TokenStorage public var tokenStorage:String?
   public func saveToken(authenticationType: AuthenticationType) {
     switch authenticationType {
